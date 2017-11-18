@@ -213,9 +213,9 @@ while True:
             sys.stdout.flush()
             name = getInput()
             if name == "": continue
-            displayn = name
-            r = requests.post(URL + "/changename", json = { "username": ID["username"], "password": ID["password"], "displayn": displayn })
+            r = requests.post(URL + "/changename", json = { "username": ID["username"], "password": ID["password"], "displayn": name })
             if r.text == "Y":
+                displayn = name
                 continue
             else:
                 print("\n" + r.text)
@@ -268,11 +268,13 @@ while True:
                     if mode & 2: prefix += "\033[3m"
                     if mode & 4: prefix += "\033[4m"
                     suffix = "\033[0m" * bool(prefix)
-                    displayn = prefix + name + suffix
+                    _display = prefix + name + suffix
                     r = requests.post(URL + "/changename", json = { "username": ID["username"], "password": ID["password"], "displayn": displayn })
                     if r.text != "Y":
                         print("\n" + r.text)
                         time.sleep(1)
+                    else:
+                        displayn = _display
                     break
                 elif code == 27:
                     break
