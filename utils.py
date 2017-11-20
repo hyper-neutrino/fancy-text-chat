@@ -1,6 +1,4 @@
+import re
+
 def removeFormatting(string):
-    while string.endswith("\033[0m"):
-        string = string[:-4]
-    while string.startswith("\033["):
-        string = string[4:]
-    return string
+    return re.sub("\033\\[\\d+m", "", string)
