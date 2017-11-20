@@ -11,7 +11,6 @@ screen. From http://code.activestate.com/recipes/134892/"""
                 self.impl = _GetchMacCarbon()
             except(AttributeError, ImportError):
                 self.impl = _GetchUnix()
-
     def __call__(self): return self.impl()
 
 
@@ -36,7 +35,7 @@ class _GetchWindows:
 
     def __call__(self):
         import msvcrt
-        return msvcrt.getch()
+        return chr(msvcrt.getch())
 
 class _GetchMacCarbon:
     """
