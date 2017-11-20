@@ -35,7 +35,7 @@ class _GetchWindows:
 
     def __call__(self):
         import msvcrt
-        return chr(msvcrt.getch())
+        return chr(msvcrt.getch()[0])
 
 class _GetchMacCarbon:
     """
